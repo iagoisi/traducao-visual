@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.reveal-hero {
+  background: #0d0a08;
+}
+
+.reveal-hero__stage {
+  --mask-x: 52vw;
+  --mask-y: 46vh;
+  --mask-size: 330px;
+  --mask-main-w: 191px;
+  --mask-main-h: 139px;
+  --mask-a-w: 139px;
+  --mask-a-h: 106px;
+  --mask-a-x: calc(52vw + 50px);
+  --mask-a-y: calc(46vh - 30px);
+  --mask-b-w: 116px;
+  --mask-b-h: 152px;
+  --mask-b-x: calc(52vw - 40px);
+  --mask-b-y: calc(46vh + 43px);
+  --glow-w: 172px;
+  --glow-h: 125px;
+  --glow-x: 52vw;
+  --glow-y: 46vh;
+  --drag-x: 0px;
+  --drag-y: 0px;
+  --cloth-tilt: 0deg;
+  --reveal-progress: 0;
+  isolation: isolate;
+}
+
+.reveal-hero__stage::before {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(
+      ellipse at calc(var(--mask-x) + var(--drag-x))
+        calc(var(--mask-y) + var(--drag-y)),
+      rgba(255, 238, 220, 0.2),
+      transparent 34%
+    ),
+    linear-gradient(90deg, rgba(23, 12, 8, 0.2), transparent 42%);
+  filter: blur(18px);
+  opacity: calc(0.3 + (var(--reveal-progress) * 0.28));
+  mix-blend-mode: screen;
+}
+
+.reveal-hero__after {
+  z-index: 2;
+  filter: saturate(1.04) contrast(1.02);
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse var(--mask-main-w) var(--mask-main-h) at var(--mask-x) var(--mask-y),
+      #000 0%,
+      #000 42%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse var(--mask-a-w) var(--mask-a-h) at var(--mask-a-x) var(--mask-a-y),
+      #000 0%,
+      #000 36%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse var(--mask-b-w) var(--mask-b-h) at var(--mask-b-x) var(--mask-b-y),
+      #000 0%,
+      #000 32%,
+      transparent 71%
+    );
+  mask-image:
+    radial-gradient(
+      ellipse var(--mask-main-w) var(--mask-main-h) at var(--mask-x) var(--mask-y),
+      #000 0%,
+      #000 42%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse var(--mask-a-w) var(--mask-a-h) at var(--mask-a-x) var(--mask-a-y),
+      #000 0%,
+      #000 36%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse var(--mask-b-w) var(--mask-b-h) at var(--mask-b-x) var(--mask-b-y),
+      #000 0%,
+      #000 32%,
+      transparent 71%
+    );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transform: rotate(var(--cloth-tilt)) scale(1.015);
+  transform-origin: var(--mask-x) var(--mask-y);
+  transition: filter 300ms ease;
+}
+
+.reveal-hero__stage[data-scroll-reveal-active="true"] .reveal-hero__after {
+  transform: none;
+}
+
+.reveal-hero__stage[data-reveal-complete="true"] .reveal-hero__after {
+  -webkit-mask-image: none;
+  mask-image: none;
+  transform: none;
+}
+
+.reveal-hero__glow {
+  z-index: 4;
+  background:
+    radial-gradient(
+      ellipse var(--glow-w) var(--glow-h) at var(--glow-x) var(--glow-y),
+      rgba(255, 230, 202, 0.32),
+      rgba(255, 214, 190, 0.1) 36%,
+      transparent 68%
+    );
+  filter: blur(16px);
+  mix-blend-mode: screen;
+  opacity: calc(0.72 - (var(--reveal-progress) * 0.24));
+}
+
+.reveal-hero__stage[data-reveal-complete="true"] .reveal-hero__glow,
+.reveal-hero__stage[data-reveal-complete="true"]::before {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .reveal-hero__stage {
+    --mask-size: 250px;
+  }
+}
