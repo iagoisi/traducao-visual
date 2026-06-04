@@ -26,13 +26,13 @@ export default function FluidCursor() {
     velocityDamping: 0.96,
     curl: 0.01,
     fadeAlpha: 0.04, // trail persistence (smaller = longer trail)
-    useImage: true, // usar /images/two.png como textura
+    useImage: true, // usar /images/2.png como textura
   };
 
   useEffect(() => {
     if (params.useImage) {
       const img = new Image();
-      img.src = "/images/two.png";
+      img.src = "/images/2.png";
       imgRef.current = img;
     }
   }, []);
