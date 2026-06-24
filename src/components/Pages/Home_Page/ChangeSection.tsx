@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import ScrollNextButton from "../../common/ScrollNextButton";
 import OrbitImages from "../../Visualization/OrbitImages";
 
@@ -27,6 +28,18 @@ const outerOrbitIcons = [
 ];
 
 export default function ChangeSection() {
+  const [isMobileOrbit, setIsMobileOrbit] = useState(false);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 639px)");
+    const updateMobileOrbit = () => setIsMobileOrbit(mobileQuery.matches);
+
+    updateMobileOrbit();
+    mobileQuery.addEventListener("change", updateMobileOrbit);
+
+    return () => mobileQuery.removeEventListener("change", updateMobileOrbit);
+  }, []);
+
   const scrollToTruthSection = () => {
     document.getElementById("verdade")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -45,7 +58,7 @@ export default function ChangeSection() {
           </h2>
 
           <div className="mt-0 max-w-lg self-end text-left lg:mt-6 lg:text-right">
-            <p className="text-xs uppercase tracking-[0.22em] text-black/50 sm:text-sm sm:tracking-[0.28em]">
+            <p className="text-xs uppercase leading-5 tracking-[0.18em] text-black/50 sm:text-sm sm:leading-6 sm:tracking-[0.22em]">
               Toda mudança interna pede
               <br />
               uma nova expressão visual.
@@ -64,11 +77,11 @@ export default function ChangeSection() {
                   images={outerOrbitIcons}
                   altPrefix="Ícone da órbita externa"
                   shape="circle"
-                  radius={520}
+                  radius={isMobileOrbit ? 585 : 520}
                   rotation={-18}
                   duration={34}
                   direction="normal"
-                  itemSize={65}
+                  itemSize={isMobileOrbit ? 110 : 78}
                   fill
                   responsive
                   showPath
@@ -81,10 +94,10 @@ export default function ChangeSection() {
                 <OrbitImages
                   images={orbitImages}
                   shape="circle"
-                  radius={380}
+                  radius={isMobileOrbit ? 410 : 380}
                   rotation={60}
                   duration={20}
-                  itemSize={160}
+                  itemSize={isMobileOrbit ? 235 : 160}
                   fill
                   responsive
                   showPath
@@ -109,11 +122,11 @@ export default function ChangeSection() {
                   images={innerOrbitIcons}
                   altPrefix="Ícone da órbita interna"
                   shape="circle"
-                  radius={245}
+                  radius={isMobileOrbit ? 235 : 245}
                   rotation={24}
                   duration={26}
                   direction="normal"
-                  itemSize={65}
+                  itemSize={isMobileOrbit ? 110 : 78}
                   fill
                   responsive
                   showPath
@@ -127,7 +140,7 @@ export default function ChangeSection() {
       </div>
       <ScrollNextButton
         target="#verdade"
-        className="absolute bottom-7 left-1/2 -translate-x-1/2"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2"
       />
     </section>
   );

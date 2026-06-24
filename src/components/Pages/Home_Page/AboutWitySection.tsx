@@ -45,7 +45,7 @@ export default function AboutWitySection() {
             </div>
 
             <blockquote className="absolute -bottom-1 left-3 max-w-[19rem] rounded-2xl border border-white/65 bg-white/84 p-4 shadow-[0_24px_70px_rgba(107,67,39,0.18)] backdrop-blur sm:-left-5 sm:max-w-[22rem] sm:p-5">
-              <p className="text-sm font-semibold leading-relaxed text-black/78 sm:text-base">
+              <p className="text-base font-semibold leading-relaxed text-black/78">
                 “Quando voltei a olhar para mim, eu não me reconhecia mais.
                 Nem no espelho, nem nas minhas roupas.”
               </p>
@@ -66,7 +66,7 @@ export default function AboutWitySection() {
               <span className="color-red">desalinhamento.</span>
             </h2>
 
-            <div className="mt-7 max-w-2xl space-y-4 text-sm leading-7 text-black/62 sm:text-base">
+            <div className="mt-7 max-w-2xl space-y-4 text-base leading-7 text-black/62">
               <p>
                 No meu caso, foi quando me tornei mãe. Entrei no modo
                 sobrevivência e, sem perceber, fui me deixando de lado. Eu
@@ -108,7 +108,7 @@ export default function AboutWitySection() {
                 />
                 <h3 className="font-semibold text-black/86">{title}</h3>
               </div>
-              <p className="mt-3 text-sm leading-6 text-black/56">
+              <p className="mt-3 text-base leading-7 text-black/56">
                 {description}
               </p>
             </article>

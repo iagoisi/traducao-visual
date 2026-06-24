@@ -112,7 +112,7 @@ function FeatureCard({ item }: { item: FeatureItem }) {
       </div>
       <div className="min-w-0">
         <h3 className="text-[clamp(0.9rem,1.65vh,1.05rem)] font-semibold leading-tight text-black/88">{item.title}</h3>
-        <p className="mt-1 max-w-md text-[clamp(0.72rem,1.35vh,0.9rem)] leading-[1.4] text-black/58">{item.description}</p>
+        <p className="mt-1 max-w-md text-sm leading-5 text-black/58 lg:text-[clamp(0.78rem,1.35vh,0.9rem)] lg:leading-[1.4]">{item.description}</p>
       </div>
     </article>
   );
@@ -167,8 +167,8 @@ function TimelineCard({
           </div>
         </div>
       </div>
-      <h3 className="min-h-[2.5rem] text-sm font-semibold leading-tight text-black/88 lg:text-[clamp(0.78rem,1.35vh,0.95rem)]">{step.title}</h3>
-      <p className="mt-2 text-sm leading-6 text-black/58 lg:mt-[clamp(0.35rem,1vh,0.75rem)] lg:text-[clamp(0.72rem,1.35vh,0.875rem)] lg:leading-[1.45]">{step.description}</p>
+      <h3 className="min-h-[2.5rem] text-base font-semibold leading-tight text-black/88 lg:text-[clamp(0.78rem,1.35vh,0.95rem)]">{step.title}</h3>
+      <p className="mt-2 text-base leading-7 text-black/58 lg:mt-[clamp(0.35rem,1vh,0.75rem)] lg:text-[clamp(0.72rem,1.35vh,0.875rem)] lg:leading-[1.45]">{step.description}</p>
       <span className="sr-only">Etapa {index + 1}</span>
     </article>
   );
@@ -272,8 +272,8 @@ export default function TranslationSection() {
             <h2 className="mt-2 text-3xl font-semibold leading-tight text-black/90 sm:text-4xl lg:mt-[clamp(0.4rem,1vh,0.7rem)] lg:text-[clamp(1.55rem,4vh,2.35rem)]">
               Por isso nasceu a<br /> <span className="color-red">Tradução Visual.</span>
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-black/62 lg:mt-[clamp(0.5rem,1.4vh,0.9rem)] lg:text-[clamp(0.78rem,1.55vh,0.95rem)] lg:leading-[1.5]">
-              Um diagnóstico visual guiado que interpreta sua fase atual<br />
+            <p className="mt-3 max-w-xl text-base leading-7 text-black/62 lg:mt-[clamp(0.5rem,1.4vh,0.9rem)] lg:text-[clamp(0.78rem,1.55vh,0.95rem)] lg:leading-[1.5]">
+              Um diagnóstico visual guiado que interpreta sua fase atual
               e transforma isso em <span className="color-red">direcionamentos visuais práticos</span> para o seu dia a dia.
             </p>
 
@@ -301,7 +301,7 @@ export default function TranslationSection() {
           <div className="relative mx-auto grid w-full max-w-2xl items-center lg:flex lg:min-h-0 xl:h-full">
             <div className="relative mx-auto h-[22rem] w-[min(92%,32rem)] sm:h-[28rem] lg:ml-auto lg:h-[24rem] lg:w-[78%] xl:h-[min(37vh,100%)] xl:max-h-[360px]">
               <TiltedCard
-                imageSrc="/images/woman_TranslationSection.png"
+                imageSrc="/images/woman_TranslationSection_2.png"
                 altText="Referência visual para tradução de imagem"
                 containerHeight="100%"
                 containerWidth="100%"
@@ -336,7 +336,7 @@ export default function TranslationSection() {
                 <h2 className="text-[clamp(1.6rem,4vh,2.25rem)] font-semibold leading-tight text-black/90">
                   Como funciona
                 </h2>
-                <p className="mt-[clamp(0.35rem,1vh,0.5rem)] text-[clamp(0.75rem,1.45vh,0.875rem)] leading-[1.45] text-black/58">
+                <p className="mt-[clamp(0.35rem,1vh,0.5rem)] text-base leading-7 text-black/58 lg:text-[clamp(0.75rem,1.45vh,0.875rem)] lg:leading-[1.45]">
                   Simples, prático e 100% pelo WhatsApp.
                 </p>
               </div>
