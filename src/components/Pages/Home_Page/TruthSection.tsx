@@ -31,9 +31,9 @@ function TruthItem({
   children: React.ReactNode;
 }) {
   return (
-    <li className="flex items-start gap-3 text-sm leading-6 text-black/68">
+    <li className="flex items-start gap-3 text-sm leading-7 text-black/68">
       <span
-        className={`mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full text-xs font-bold ${
+        className={`mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full text-base font-bold ${
           tone === "wrong"
             ? "bg-red-500/12 text-red-500"
             : "bg-emerald-500/12 text-emerald-600"
@@ -53,11 +53,11 @@ export default function TruthSection() {
       <div className="site-container grid items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-12">
         <div className="relative min-h-[300px] overflow-hidden rounded-[2rem] bg-[#ead9aa] sm:min-h-[400px] lg:min-h-[480px] xl:min-h-[520px]">
           <Image
-            src="/images/NT_provando_roupa.png"
+            src="/images/onee-hero.png"
             alt="Mulher provando roupa diante do espelho"
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
-            className="object-cover object-left"
+            className="object-cover object-[62%_center]"
           />
         </div>
 

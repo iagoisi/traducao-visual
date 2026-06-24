@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { Camera, Mail, MessageCircle } from "lucide-react";
+import { trackInitiateContactSupport } from "@/src/services/Meta/metaPixel";
 
 const navigation = [
   { href: "#inicio", label: "Início" },
@@ -7,6 +10,11 @@ const navigation = [
   { href: "#sobre", label: "Sobre a Wity" },
   { href: "#duvidas", label: "Dúvidas" },
 ];
+
+const supportWhatsappUrl =
+  "https://wa.me/556791100122?text=Ol%C3%A1%21%20Preciso%20de%20suporte%20sobre%20a%20Tradu%C3%A7%C3%A3o%20Visual.";
+
+const instagramUrl = "https://www.instagram.com/wityprado";
 
 export default function Footer() {
   return (
@@ -21,14 +29,14 @@ export default function Footer() {
               height={70}
               className="h-auto w-44 brightness-0"
             />
-            <p className="mt-5 max-w-md text-sm leading-7 text-black/55">
+            <p className="mt-5 max-w-md text-base leading-7 text-black/55 sm:text-sm">
               Uma leitura da sua imagem para revelar, com clareza, a mulher que você se tornou.
             </p>
           </div>
 
           <div>
             <h2 className="text-sm font-semibold text-black/82">Navegue</h2>
-            <nav className="mt-4 grid gap-3 text-sm text-black/55">
+            <nav className="mt-4 grid gap-3 text-base text-black/55 sm:text-sm">
               {navigation.map((item) => (
                 <a key={item.label} href={item.href} className="w-fit transition-[color,transform] duration-300 hover:translate-x-1 hover:text-red-500">
                   {item.label}
@@ -39,12 +47,30 @@ export default function Footer() {
 
           <div>
             <h2 className="text-sm font-semibold text-black/82">Conecte-se</h2>
-            <div className="mt-4 grid gap-3 text-sm text-black/55">
-              <a href="#" className="group flex w-fit items-center gap-3 transition-[color,transform] duration-300 hover:translate-x-1 hover:text-red-500">
+            <div className="mt-4 grid gap-3 text-base text-black/55 sm:text-sm">
+              <a
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex w-fit items-center gap-3 transition-[color,transform] duration-300 hover:translate-x-1 hover:text-red-500"
+              >
                 <Camera className="h-4 w-4" aria-hidden="true" />
                 Instagram
               </a>
-              <a href="#" className="group flex w-fit items-center gap-3 transition-[color,transform] duration-300 hover:translate-x-1 hover:text-red-500">
+              <a
+                href={supportWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  void trackInitiateContactSupport({
+                    content_name: "WhatsApp suporte",
+                    content_category: "Footer",
+                    placement: "footer support",
+                    destination: "Support WhatsApp",
+                  });
+                }}
+                className="group flex w-fit items-center gap-3 transition-[color,transform] duration-300 hover:translate-x-1 hover:text-red-500"
+              >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 WhatsApp
               </a>
@@ -56,7 +82,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-black/8 pt-6 text-xs text-black/42 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-black/8 pt-6 text-base text-black/42 sm:flex-row sm:items-center sm:justify-between sm:text-sm">
           <p>© 2026 Tradução Visual. Todos os direitos reservados.</p>
           <div className="flex gap-5">
             <a href="#" className="transition-colors duration-300 hover:text-red-500">Privacidade</a>

@@ -36,8 +36,8 @@ const clamp = (value: number, min: number, max: number) =>
 const easeOutCubic = (value: number) => 1 - Math.pow(1 - value, 3);
 
 export default function RevealHero({
-  beforeSrc = "/images/uno.png",
-  afterSrc = "/images/dois.png",
+  beforeSrc = "/images/onee-hero.png",
+  afterSrc = "/images/2-hero.png",
 }: RevealHeroProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -214,13 +214,13 @@ export default function RevealHero({
 
         <div className="relative z-20 flex h-full w-full items-center px-5 sm:px-6">
           <div className="reveal-hero__copy site-container pb-8 pt-24 text-[#fff8ef] sm:pb-10 lg:pb-12 lg:pt-20 xl:pb-20 xl:pt-0">
-            <h1 className="max-w-3xl text-[clamp(2.15rem,11vw,4rem)] font-semibold leading-[1.03] sm:text-5xl lg:text-6xl xl:text-7xl">
+            <h1 className="max-w-3xl text-[clamp(1.9rem,9.6vw,3.45rem)] font-semibold leading-[1.04] sm:text-5xl sm:leading-[1.03] lg:text-6xl xl:text-7xl">
               Tem roupa que<br/>  
               serve no seu corpo,<br/> 
               mas não cabe<br/>  
               mais na sua vida.
             </h1>
-            <p className="mb-6 mt-4 max-w-2xl text-sm leading-6 text-[#fff8ef]/82 sm:mb-8 sm:mt-5 sm:text-base sm:leading-7 xl:mb-10 xl:text-lg">
+            <p className="mb-6 mt-4 max-w-2xl text-base leading-7 text-[#fff8ef]/82 sm:mb-8 sm:mt-5 xl:mb-10 xl:text-lg">
               Descubra qual imagem representa<br />
               quem você é hoje e transforme isso<br />
               em escolhas que fazem sentido<br />

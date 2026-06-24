@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { MetaPixelBootstrap } from "@/src/components/common/MetaPixelBootstrap";
+import { Suspense } from "react";
 import "../src/styles/globals.css";
 import { Arbutus_Slab, Host_Grotesk } from "next/font/google";
 
@@ -22,7 +23,14 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${titleFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+
+        <Suspense fallback={null}>
+          <MetaPixelBootstrap />
+        </Suspense>
+        
+        {children}
+        </body>
     </html>
   );
 }

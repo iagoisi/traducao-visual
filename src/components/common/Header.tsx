@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { smoothScrollTo } from "@/src/utils/smoothScroll";
+import { trackInitiateContact } from "@/src/services/Meta/metaPixel";
 import Button from "./Button";
 
 const HEADER_GRADIENT_SCROLL_THRESHOLD = 24;
@@ -23,6 +24,9 @@ const navLinks: NavLink[] = [
   { href: "#duvidas", label: "Dúvidas", duration: 1100, offset: 72 },
   { href: "#produto", label: "Produto", duration: 1100, offset: 72 },
 ];
+
+const anaWhatsappUrl =
+  "https://wa.me/556792373674?text=Ol%C3%A1%2C%20Ana%21%20Quero%20realizar%20minha%20Tradu%C3%A7%C3%A3o%20Visual.";
 
 function Header() {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -74,6 +78,15 @@ function Header() {
   }, [isMenuOpen]);
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  const trackAnaContact = (placement: string) => {
+    void trackInitiateContact({
+      content_name: "Quero minha Traducao Visual",
+      content_category: "Header",
+      placement,
+      destination: "Ana WhatsApp",
+    });
+  };
 
   const handleNavClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -141,7 +154,12 @@ function Header() {
         </nav>
 
         <div className="hidden xl:block">
-          <Button href="#traducao" duration={1200} offset={0} className="px-5 py-3">
+          <Button
+            href={anaWhatsappUrl}
+            target="_blank"
+            onClick={() => trackAnaContact("desktop nav")}
+            className="px-5 py-3"
+          >
             Quero minha Tradução Visual
           </Button>
         </div>
@@ -211,10 +229,12 @@ function Header() {
         </nav>
 
         <Button
-          href="#traducao"
-          duration={1200}
-          offset={0}
-          onClick={closeMenu}
+          href={anaWhatsappUrl}
+          target="_blank"
+          onClick={() => {
+            closeMenu();
+            trackAnaContact("mobile nav");
+          }}
           className="mt-4 flex w-full justify-center px-5 py-3"
         >
           Quero minha Tradução Visual

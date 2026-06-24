@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Check,
   Clock3,
@@ -7,6 +9,7 @@ import {
   UserRoundCheck,
 } from "lucide-react";
 import Button from "../../common/Button";
+import { trackInitiateContact } from "@/src/services/Meta/metaPixel";
 
 const benefits = [
   "Experiência guiada pelo WhatsApp, no seu tempo",
@@ -16,6 +19,9 @@ const benefits = [
   "Mais clareza para se vestir e menos compras erradas",
   "Encontro ao vivo com a Wity para tirar dúvidas",
 ];
+
+const anaWhatsappUrl =
+  "https://wa.me/556792373674?text=Ol%C3%A1%2C%20Ana%21%20Quero%20realizar%20minha%20Tradu%C3%A7%C3%A3o%20Visual.";
 
 export default function ProductSection() {
   return (
@@ -30,7 +36,7 @@ export default function ProductSection() {
               <h2 className="mt-5 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
                 Pronta para se reconhecer de novo?
               </h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/68 sm:text-base">
+              <p className="mt-5 max-w-2xl text-base leading-7 text-white/68">
                 Por menos do que uma blusa que você acha linda, compra e não usa,
                 receba clareza e direção para alinhar sua imagem com a mulher que
                 você é hoje.
@@ -38,7 +44,7 @@ export default function ProductSection() {
 
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {benefits.map((benefit) => (
-                  <div key={benefit} className="flex items-start gap-3 text-sm text-white/76">
+                  <div key={benefit} className="flex items-start gap-3 text-base leading-7 text-white/76">
                     <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#ff786d] text-white">
                       <Check className="h-3 w-3" aria-hidden="true" />
                     </span>
@@ -49,11 +55,11 @@ export default function ProductSection() {
             </div>
 
             <div className="rounded-[1.5rem] border border-white/12 bg-white/8 p-6 backdrop-blur sm:p-8">
-              <div className="flex items-center gap-3 text-sm text-[#ffb7ad]">
+              <div className="flex items-center gap-3 text-base text-[#ffb7ad]">
                 <FileText className="h-5 w-5" aria-hidden="true" />
                 Sua Tradução Visual personalizada
               </div>
-              <p className="mt-7 text-sm text-white/55">Investimento único</p>
+              <p className="mt-7 text-base text-white/55">Investimento único</p>
               <div className="mt-1 flex items-end gap-2">
                 <span className="pb-2 text-lg text-white/65">R$</span>
                 <strong className="text-6xl font-semibold leading-none text-white">47</strong>
@@ -61,16 +67,25 @@ export default function ProductSection() {
               </div>
 
               <Button
-                href="/contato"
+                href={anaWhatsappUrl}
                 duration={800}
+                target="_blank"
                 offset={0}
-                className="mt-7 flex w-full items-center justify-center gap-2 bg-[#ff786d] px-5 py-4 text-center"
+                onClick={() => {
+                  void trackInitiateContact({
+                    content_name: "Comecar agora pelo WhatsApp",
+                    content_category: "Product Section",
+                    placement: "product card",
+                    destination: "Ana WhatsApp",
+                  });
+                }}
+                className="mt-7 blank flex w-full items-center justify-center gap-2 bg-[#ff786d] px-5 py-4 text-center"
               >
                 Começar agora pelo WhatsApp
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
               </Button>
 
-              <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/10 pt-5 text-xs text-white/55">
+              <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/10 pt-5 text-sm leading-5 text-white/55">
                 <span className="flex items-center gap-2">
                   <Clock3 className="h-4 w-4 text-[#ffb7ad]" aria-hidden="true" />
                   No seu tempo
@@ -81,7 +96,7 @@ export default function ProductSection() {
                 </span>
               </div>
 
-              <div className="mt-4 flex items-start gap-3 border-t border-white/10 pt-4 text-xs leading-5 text-white/55">
+              <div className="mt-4 flex items-start gap-3 border-t border-white/10 pt-4 text-sm leading-6 text-white/55">
                 <UserRoundCheck
                   className="mt-0.5 h-4 w-4 shrink-0 text-[#ffb7ad]"
                   aria-hidden="true"

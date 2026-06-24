@@ -54,7 +54,7 @@ export default function FaqSection() {
             <br />
             frequentes.
           </h2>
-          <p className="mt-5 max-w-sm text-sm leading-7 text-black/58 sm:text-base">
+          <p className="mt-5 max-w-sm text-base leading-7 text-black/58">
             Respostas claras para você começar com segurança, sabendo como a experiência funciona e o que será entregue.
           </p>
         </div>
@@ -73,7 +73,7 @@ export default function FaqSection() {
                   }`}
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm font-semibold text-black/82 sm:text-base">
+                  <span className="text-base font-semibold text-black/82">
                     {item.question}
                   </span>
                   <ChevronDown
@@ -89,7 +89,7 @@ export default function FaqSection() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-5 pb-6 text-sm leading-7 text-black/58 sm:px-7">
+                    <p className="px-5 pb-6 text-base leading-7 text-black/58 sm:px-7">
                       {item.answer}
                     </p>
                   </div>
