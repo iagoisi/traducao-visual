@@ -19,7 +19,7 @@ const missingItems: TruthListItem[] = [
   { text: "Interpretar quem você é hoje" },
   { text: "Comunicar isso visualmente" },
   { text: "Construir coerência" },
-  { text: "Se reconhecer de novo" },
+  { text: "Vestir se de si mesma" },
   { text: "Traduzir sua identidade", secondLine: "em imagem" },
 ];
 

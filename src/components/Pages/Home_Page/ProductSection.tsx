@@ -15,13 +15,13 @@ const benefits = [
   "Experiência guiada pelo WhatsApp, no seu tempo",
   "Tradução Visual personalizada em PDF",
   "Cores, estampas, tecidos, materiais, peças e acessórios",
+  "Mais clareza na hora de se vestir",
   "Direcionamento prático para aplicar no dia a dia",
-  "Mais clareza para se vestir e menos compras erradas",
-  "Encontro ao vivo com a Wity para tirar dúvidas",
+  "Compras conscientes e inteligentes",
 ];
 
 const anaWhatsappUrl =
-  "https://wa.me/556792373674?text=Ol%C3%A1%2C%20Ana%21%20Quero%20realizar%20minha%20Tradu%C3%A7%C3%A3o%20Visual.";
+  "https://wa.me/556792373674?text=Ol%C3%A1%2C%20Ana%21%20Quero%20come%C3%A7ar%20minha%20Tradu%C3%A7%C3%A3o%20Visual.%20Pode%20me%20enviar%20o%20link%20para%20pagamento%3F";
 
 export default function ProductSection() {
   return (
@@ -34,7 +34,7 @@ export default function ProductSection() {
                 Você mudou. Sua imagem pode acompanhar.
               </p>
               <h2 className="mt-5 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-                Pronta para se reconhecer de novo?
+                Pronta para começar?
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/68">
                 Por menos do que uma blusa que você acha linda, compra e não usa,
@@ -85,10 +85,10 @@ export default function ProductSection() {
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
               </Button>
 
-              <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/10 pt-5 text-sm leading-5 text-white/55">
+              <div className="mt-6 flex justify-center gap-4 border-t border-white/10 pt-5 text-sm leading-5 text-white/55">
                 <span className="flex items-center gap-2">
                   <Clock3 className="h-4 w-4 text-[#ffb7ad]" aria-hidden="true" />
-                  No seu tempo
+                  Aprox. 20 Minutos
                 </span>
                 <span className="flex items-center gap-2">
                   <LockKeyhole className="h-4 w-4 text-[#ffb7ad]" aria-hidden="true" />

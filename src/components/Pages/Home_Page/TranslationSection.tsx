@@ -56,7 +56,7 @@ const translationFeatures: FeatureItem[] = [
   {
     imageSrc: "/images/TranslationSection/bloco1/espelho.png",
     title: "Reconhecimento",
-    description: "Você se reencontrando e se sentindo bem com isso.",
+    description: "Se reconheça e sinta-se bem consigo.",
   },
 ];
 
@@ -67,7 +67,7 @@ const processSteps: TimelineStep[] = [
     eyebrow: "Conversa guiada",
     title: "Você fala com a Ana",
     description:
-      "Seu processo de transformação começa com uma conversa pelo WhatsApp com a Ana, nossa assistente de IA.",
+      "Tudo começa com uma conversa pelo Whatsapp com a Ana, nossa assistente de IA. Ela vai te guiar de forma simples  e personalizada, durante toda a experiência.",
   },
   {
     marker: "2",
@@ -75,7 +75,7 @@ const processSteps: TimelineStep[] = [
     eyebrow: "Leitura da sua fase",
     title: "Responda algumas perguntas",
     description:
-      "Ela te faz perguntas estratégicas para entender sua fase de vida, rotina, preferências e objetivos.",
+      "Através de perguntas estratégicas, ela entende sua rotina, preferências e objetivos para criar sua Tradução Visual personalizada. \n Aprox. 20 min",
   },
   {
     marker: "3",
@@ -83,7 +83,7 @@ const processSteps: TimelineStep[] = [
     eyebrow: "Método autoral",
     title: "A Ana interpreta suas respostas",
     description:
-      "Com base no meu método autoral, a Ana interpreta suas respostas e cria sua Tradução Visual personalizada.",
+      "Com base no meu método autoral, a Ana interpreta suas respostas transforma suas informações, necessidades e objetivos em uma Tradução Visual totalmente personalizada.",
   },
   {
     marker: "4",
@@ -91,7 +91,7 @@ const processSteps: TimelineStep[] = [
     eyebrow: "Direção para aplicar",
     title: "Você recebe sua Tradução Visual",
     description:
-      "Um guia completo em PDF, com direcionamentos práticos e personalizados para você aplicar sua Tradução Visual no dia a dia.",
+      "Um guia completo e personalizado em PDF, com orientações sobre cores, materiais, estampas, linhas e formas, acessórios e calçados para você aplicar sua tradução visual no dia a dia",
   },
 ];
 
@@ -168,7 +168,7 @@ function TimelineCard({
         </div>
       </div>
       <h3 className="min-h-[2.5rem] text-base font-semibold leading-tight text-black/88 lg:text-[clamp(0.78rem,1.35vh,0.95rem)]">{step.title}</h3>
-      <p className="mt-2 text-base leading-7 text-black/58 lg:mt-[clamp(0.35rem,1vh,0.75rem)] lg:text-[clamp(0.72rem,1.35vh,0.875rem)] lg:leading-[1.45]">{step.description}</p>
+      <p className="mt-2 whitespace-pre-line text-base leading-7 text-black/58 lg:mt-[clamp(0.35rem,1vh,0.75rem)] lg:text-[clamp(0.72rem,1.35vh,0.875rem)] lg:leading-[1.45]">{step.description}</p>
       <span className="sr-only">Etapa {index + 1}</span>
     </article>
   );
@@ -274,7 +274,7 @@ export default function TranslationSection() {
             </h2>
             <p className="mt-3 max-w-xl text-base leading-7 text-black/62 lg:mt-[clamp(0.5rem,1.4vh,0.9rem)] lg:text-[clamp(0.78rem,1.55vh,0.95rem)] lg:leading-[1.5]">
               Um diagnóstico visual guiado que interpreta sua fase atual
-              e transforma isso em <span className="color-red">direcionamentos visuais práticos</span> para o seu dia a dia.
+              e transforma isso em <span className="color-red">escolhas visuais práticas</span> para o seu dia a dia.
             </p>
 
             <div className="mt-5 h-[22rem] w-full sm:h-[14rem] lg:mt-[clamp(0.9rem,2.2vh,1.4rem)] xl:h-[clamp(11rem,22vh,13rem)]">
@@ -317,7 +317,7 @@ export default function TranslationSection() {
                 displayOverlayContent
                 overlayContent={
                   <div className="absolute right-2 top-2 z-10 w-[min(14rem,76%)] rounded-2xl border border-white/46 bg-white/78 p-[clamp(0.6rem,1.25vh,0.8rem)] text-[clamp(0.85rem,1.7vh,1.05rem)] font-semibold leading-tight text-black/84 shadow-[0_28px_80px_rgba(107,67,39,0.16)] backdrop-blur sm:-right-4 sm:-top-6 lg:-right-12 xl:-right-20 xl:-top-8">
-                    Sua imagem não precisa gritar. Ela precisa traduzir você.
+                    É simples, prático e acessível traduzir quem você é.
                   </div>
                 }
               />

@@ -15,25 +15,26 @@ const questions = [
       "Sim, pela Ana no WhatsApp. Mas ela não é uma IA genérica: foi treinada com o método e o olhar da Wity para conduzir uma conversa acolhedora, interpretar suas respostas e criar uma entrega personalizada.",
   },
   {
+    question: "Quanto tempo leva a conversa com a Ana?",
+    answer:
+      "Em torno de 20 minutos. Você pode pensar com calma, responder com sinceridade e quanto mais detalhadas forem as suas respostas mais rica será a sua tradução visual.",
+  },
+  {
+    question: "O que vou receber na minha tradução?",
+    answer:
+      "Você recebe pelo WhatsApp um PDF personalizado com intenção visual, tonalidades, estampas, tecidos, texturas, materiais, calçados, acessórios, consciência corporal e direcionamentos para aplicar tudo no cotidiano.",
+  },
+  {
     question: "Vou precisar renovar todo o meu guarda-roupa?",
     answer:
       "Não. A ideia é justamente parar de comprar errado. Você começa entendendo melhor o que já possui, o que ainda representa você e como fazer escolhas futuras com mais clareza e intenção.",
-  },
-  {
-    question: "O que vou receber ao final?",
-    answer:
-      "Você recebe pelo WhatsApp um PDF personalizado com intenção visual, tonalidades, estampas, tecidos, texturas, materiais, calçados, acessórios, consciência corporal e direcionamentos para aplicar tudo no cotidiano.",
   },
   {
     question: "Posso continuar falando com a Ana depois da entrega?",
     answer:
       "A Ana finaliza o atendimento após entregar sua Tradução Visual. Caso surjam dúvidas depois disso, você poderá falar com a Vitória, responsável pelo suporte humano no WhatsApp.",
   },
-  {
-    question: "Preciso responder tudo de uma vez?",
-    answer:
-      "Não. A conversa acontece no seu tempo. Você pode pensar com calma, responder com sinceridade e continuar depois. Quanto mais detalhadas forem suas respostas, mais rica será sua Tradução Visual.",
-  },
+  
 ];
 
 export default function FaqSection() {
