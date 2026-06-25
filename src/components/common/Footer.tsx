@@ -72,11 +72,11 @@ export default function Footer() {
                 className="group flex w-fit items-center gap-3 transition-[color,transform] duration-300 hover:translate-x-1 hover:text-red-500"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                WhatsApp
+                Suporte
               </a>
-              <a href="mailto:contato@traducaovisual.com.br" className="group flex w-fit items-center gap-3 transition-[color,transform] duration-300 hover:translate-x-1 hover:text-red-500">
+              <a href="mailto:tradutoravisual@gmail.com" className="group flex w-fit items-center gap-3 transition-[color,transform] duration-300 hover:translate-x-1 hover:text-red-500">
                 <Mail className="h-4 w-4" aria-hidden="true" />
-                contato@traducaovisual.com.br
+                tradutoravisual@gmail.com
               </a>
             </div>
           </div>

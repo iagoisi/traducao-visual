@@ -26,7 +26,7 @@ const navLinks: NavLink[] = [
 ];
 
 const anaWhatsappUrl =
-  "https://wa.me/556792373674?text=Ol%C3%A1%2C%20Ana%21%20Quero%20realizar%20minha%20Tradu%C3%A7%C3%A3o%20Visual.";
+  "https://wa.me/556792373674?text=Ol%C3%A1%2C%20Ana%21%20Quero%20come%C3%A7ar%20minha%20Tradu%C3%A7%C3%A3o%20Visual.%20Pode%20me%20enviar%20o%20link%20para%20pagamento%3F";
 
 function Header() {
   const [hasScrolled, setHasScrolled] = useState(false);

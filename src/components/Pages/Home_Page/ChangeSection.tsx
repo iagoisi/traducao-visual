@@ -10,7 +10,6 @@ const orbitImages = [
   "/images/section2/c.png",
   "/images/section2/d.png",
   "/images/section2/e.png",
-  "/images/section2/f.png",
 ];
 
 const innerOrbitIcons = [
@@ -49,21 +48,17 @@ export default function ChangeSection() {
       <div className="site-container flex flex-1 flex-col justify-center gap-7 sm:gap-9 lg:gap-10">
         <div className="grid items-start gap-6 lg:grid-cols-[1.3fr_0.7fr] lg:items-center lg:gap-8">
           <h2 className="mt-2 max-w-xl text-3xl font-semibold leading-tight text-black/90 sm:text-4xl lg:text-3xl">
-            A vida muda.
-            <br />
-            E você muda com ela.
-            <br />
-            Sua imagem pode <span className="color-red">acompanhar</span>
+            Você mudou e a sua <br /> imagem não <span className="color-red">acompanhou.</span>
             <br />
           </h2>
 
           <div className="mt-0 max-w-lg self-end text-left lg:mt-6 lg:text-right">
             <p className="text-xs uppercase leading-5 tracking-[0.18em] text-black/50 sm:text-sm sm:leading-6 sm:tracking-[0.22em]">
-              Toda mudança interna pede
+              Toda mudança interna 
               <br />
-              uma nova expressão visual.
+              pede um ajuste no visual.
               <br />
-              <span className="color-red">O problema é quando ela não vem.</span>
+              <span className="color-red">O problema é quando ele não acontece.</span>
               <br />
             </p>
           </div>
@@ -110,7 +105,7 @@ export default function ChangeSection() {
                         onClick={scrollToTruthSection}
                         className="h-full w-full cursor-pointer rounded-full px-3 text-[0.65rem] uppercase tracking-[0.16em] text-white transition-[transform,background-color,box-shadow] duration-300 hover:scale-105 hover:bg-white/12 hover:shadow-[0_18px_50px_rgba(255,82,82,0.28)] active:scale-95 sm:px-5 sm:text-xs sm:tracking-[0.2em] lg:text-sm lg:tracking-[0.22em]"
                       >
-                        Nova Percepção
+                        Fases da Vida
                       </button>
                     </div>
                   }

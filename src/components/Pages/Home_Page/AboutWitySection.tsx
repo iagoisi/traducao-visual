@@ -10,15 +10,15 @@ const expertise = [
   },
   {
     icon: ScanFace,
-    title: "22+ anos de olhar",
+    title: "22+ anos",
     description:
-      "Experiência traduzindo identidade, comportamento e intenção em escolhas visuais possíveis.",
+      "Direcionando mulheres reais a traduzirem no visual quem elas são.",
   },
   {
     icon: Shapes,
     title: "Método autoral",
     description:
-      "Construção Visual sem fórmulas prontas, regras engessadas ou padrões que apagam quem você é.",
+      "Construção Visual Guiada sem fórmulas prontas, regras engessadas ou padrões genéricos",
   },
 ];
 

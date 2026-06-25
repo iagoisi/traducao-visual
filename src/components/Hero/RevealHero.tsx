@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ArrowDown } from "lucide-react";
 import { useEffect, useRef } from "react";
 import Header from "@/src/components/common/Header";
 import Button from "../common/Button";
@@ -214,19 +215,20 @@ export default function RevealHero({
 
         <div className="relative z-20 flex h-full w-full items-center px-5 sm:px-6">
           <div className="reveal-hero__copy site-container pb-8 pt-24 text-[#fff8ef] sm:pb-10 lg:pb-12 lg:pt-20 xl:pb-20 xl:pt-0">
-            <h1 className="max-w-3xl text-[clamp(1.9rem,9.6vw,3.45rem)] font-semibold leading-[1.04] sm:text-5xl sm:leading-[1.03] lg:text-6xl xl:text-7xl">
+            <h1 className="max-w-4xl text-[clamp(1.9rem,9.6vw,3.45rem)] font-semibold leading-[1.04] sm:text-5xl sm:leading-[1.03] lg:text-5xl xl:text-6xl">
               Tem roupa que<br/>  
               serve no seu corpo,<br/> 
               mas não cabe<br/>  
               mais na sua vida.
             </h1>
-            <p className="mb-6 mt-4 max-w-2xl text-base leading-7 text-[#fff8ef]/82 sm:mb-8 sm:mt-5 xl:mb-10 xl:text-lg">
-              Descubra qual imagem representa<br />
-              quem você é hoje e transforme isso<br />
-              em escolhas que fazem sentido<br />
-              para sua vida.<br />
+            <p className="mb-6 mt-4 max-w-3xl text-base leading-7 text-[#fff8ef]/82 sm:mb-8 sm:mt-5 xl:mb-10 xl:text-xl">
+              Descubra o que te representa.<br />
+              Traduza em escolhas visuais a mulher<br /> que você é hoje.
             </p>
-            <Button href="#mudanca" duration={50} offset={0}/>
+            <Button href="#mudanca" duration={50} offset={0} className="gap-2 text-lg">
+              Quero conhecer
+              <ArrowDown className="h-5 w-5 animate-bounce" aria-hidden="true" />
+            </Button>
           </div>
         </div>
       </div>
