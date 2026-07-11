@@ -6,6 +6,7 @@ import { trackInitiateContact } from "@/src/services/Meta/metaPixel";
 import HeaderNeo from "@/src/components/common/HeaderNeo";
 
 const sequenceSrc = "/images/ezgif.com-video-to-webp-converter3.webp";
+const sequenceVideoSrc = "/images/hero_mp4.mp4";
 
 const anaWhatsappUrl =
   "https://wa.me/556792373674?text=Ol%C3%A1%2C%20Ana%21%20Quero%20come%C3%A7ar%20minha%20Tradu%C3%A7%C3%A3o%20Visual.%20Pode%20me%20enviar%20o%20link%20para%20pagamento%3F";
@@ -32,19 +33,40 @@ type WebpImageDecoderConstructor = new (options: {
   data: BufferSource;
 }) => WebpImageDecoder;
 
+type DrawableFrame = CanvasImageSource & {
+  naturalWidth?: number;
+  naturalHeight?: number;
+  videoWidth?: number;
+  videoHeight?: number;
+  width?: number;
+  height?: number;
+  close?: () => void;
+};
+
+function getSourceSize(image: DrawableFrame) {
+  return {
+    width: image.naturalWidth ?? image.videoWidth ?? Number(image.width),
+    height: image.naturalHeight ?? image.videoHeight ?? Number(image.height),
+  };
+}
+
 function drawCover(
   context: CanvasRenderingContext2D,
-  image: CanvasImageSource & {
-    naturalWidth?: number;
-    naturalHeight?: number;
-    width?: number;
-    height?: number;
-  },
+  image: DrawableFrame,
   width: number,
   height: number
 ) {
-  const sourceWidth = image.naturalWidth ?? Number(image.width);
-  const sourceHeight = image.naturalHeight ?? Number(image.height);
+  const { width: sourceWidth, height: sourceHeight } = getSourceSize(image);
+
+  if (
+    !Number.isFinite(sourceWidth) ||
+    !Number.isFinite(sourceHeight) ||
+    sourceWidth <= 0 ||
+    sourceHeight <= 0
+  ) {
+    return;
+  }
+
   const imageRatio = sourceWidth / sourceHeight;
   const canvasRatio = width / height;
   const drawWidth = imageRatio > canvasRatio ? height * imageRatio : width;
@@ -58,17 +80,21 @@ function drawCover(
 
 function drawMobileHeroFrame(
   context: CanvasRenderingContext2D,
-  image: CanvasImageSource & {
-    naturalWidth?: number;
-    naturalHeight?: number;
-    width?: number;
-    height?: number;
-  },
+  image: DrawableFrame,
   width: number,
   height: number
 ) {
-  const sourceWidth = image.naturalWidth ?? Number(image.width);
-  const sourceHeight = image.naturalHeight ?? Number(image.height);
+  const { width: sourceWidth, height: sourceHeight } = getSourceSize(image);
+
+  if (
+    !Number.isFinite(sourceWidth) ||
+    !Number.isFinite(sourceHeight) ||
+    sourceWidth <= 0 ||
+    sourceHeight <= 0
+  ) {
+    return;
+  }
+
   const imageRatio = sourceWidth / sourceHeight;
   const canvasRatio = width / height;
   const coverWidth = imageRatio > canvasRatio ? height * imageRatio : width;
@@ -87,7 +113,7 @@ function drawMobileHeroFrame(
 export default function SequenceHeroTest() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const framesRef = useRef<ImageBitmap[]>([]);
+  const framesRef = useRef<DrawableFrame[]>([]);
   const frameRef = useRef({ index: 0 });
 
   useEffect(() => {
@@ -127,7 +153,10 @@ export default function SequenceHeroTest() {
     const resizeObserver = new ResizeObserver(renderFrame);
     resizeObserver.observe(canvas);
 
-    const setupScrollSequence = async (frameCount: number) => {
+    const setupScrollSequence = async (
+      frameCount: number,
+      onScrollUpdate?: (progress: number) => void
+    ) => {
       const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
         import("gsap"),
         import("gsap/ScrollTrigger"),
@@ -146,7 +175,10 @@ export default function SequenceHeroTest() {
           start: "top top",
           end: "bottom bottom",
           scrub: true,
-          onUpdate: renderFrame,
+          onUpdate: (self) => {
+            onScrollUpdate?.(self.progress);
+            renderFrame();
+          },
         },
         onUpdate: renderFrame,
       });
@@ -159,6 +191,45 @@ export default function SequenceHeroTest() {
       renderFrame();
     };
 
+    const setupVideoFallback = async () => {
+      const video = document.createElement("video");
+      video.muted = true;
+      video.playsInline = true;
+      video.preload = "auto";
+      video.src = sequenceVideoSrc;
+
+      await new Promise<void>((resolve, reject) => {
+        video.onloadeddata = () => resolve();
+        video.onerror = () => reject(new Error("Hero video could not be loaded"));
+        video.load();
+      });
+
+      if (disposed) return;
+
+      framesRef.current = [video];
+      video.currentTime = 0;
+      renderFrame();
+
+      const updateVideoProgress = (progress: number) => {
+        const duration = video.duration || 0;
+        if (!duration) return;
+
+        const nextTime = Math.min(
+          Math.max(progress * duration, 0),
+          Math.max(duration - 0.001, 0)
+        );
+
+        if (Math.abs(video.currentTime - nextTime) > 0.015) {
+          video.currentTime = nextTime;
+        }
+      };
+
+      video.addEventListener("seeked", renderFrame);
+      video.addEventListener("timeupdate", renderFrame);
+
+      void setupScrollSequence(120, updateVideoProgress);
+    };
+
     const decodeWebpFrames = async () => {
       const ImageDecoderConstructor = (
         window as unknown as {
@@ -167,26 +238,31 @@ export default function SequenceHeroTest() {
       ).ImageDecoder;
 
       if (!ImageDecoderConstructor) {
-        const image = new window.Image();
-        image.onload = async () => {
-          if (disposed) return;
-          const bitmap = await createImageBitmap(image);
-          framesRef.current = [bitmap];
-          renderFrame();
-          void setupScrollSequence(1);
-        };
-        image.src = sequenceSrc;
+        await setupVideoFallback();
         return;
       }
 
-      const response = await fetch(sequenceSrc);
-      const buffer = await response.arrayBuffer();
-      const decoder = new ImageDecoderConstructor({
-        type: "image/webp",
-        data: buffer,
-      });
+      let decoder: WebpImageDecoder;
 
-      await decoder.tracks.ready;
+      try {
+        const response = await fetch(sequenceSrc);
+        const buffer = await response.arrayBuffer();
+        decoder = new ImageDecoderConstructor({
+          type: "image/webp",
+          data: buffer,
+        });
+      } catch {
+        await setupVideoFallback();
+        return;
+      }
+
+      try {
+        await decoder.tracks.ready;
+      } catch {
+        decoder.close();
+        await setupVideoFallback();
+        return;
+      }
 
       if (disposed) {
         decoder.close();
@@ -197,7 +273,17 @@ export default function SequenceHeroTest() {
       const decodedFrames: ImageBitmap[] = [];
 
       for (let index = 0; index < frameCount; index += 1) {
-        const { image } = await decoder.decode({ frameIndex: index });
+        let decodedFrame: WebpDecoderFrame;
+
+        try {
+          decodedFrame = await decoder.decode({ frameIndex: index });
+        } catch {
+          decoder.close();
+          await setupVideoFallback();
+          return;
+        }
+
+        const { image } = decodedFrame;
 
         if (disposed) {
           image.close?.();
@@ -237,7 +323,7 @@ export default function SequenceHeroTest() {
       window.removeEventListener("resize", renderFrame);
       resizeObserver.disconnect();
       cleanupAnimation?.();
-      frames.forEach((frame) => frame.close());
+      frames.forEach((frame) => frame.close?.());
     };
   }, []);
 
