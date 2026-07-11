@@ -26,7 +26,7 @@ const anaWhatsappUrl =
 export default function ProductSection() {
   return (
     <section id="produto" className="relative overflow-x-clip px-5 py-20 text-black sm:px-6 lg:py-28">
-      <div className="site-container">
+      <div className="site-container-wide">
         <div className="relative overflow-hidden rounded-[2rem] border border-white/28 bg-[#462936] px-5 py-12 text-white shadow-[0_35px_120px_rgba(70,41,54,0.28)] sm:px-10 lg:px-14 lg:py-16">
           <div className="relative grid items-center gap-12 lg:grid-cols-[1.18fr_0.82fr]">
             <div>

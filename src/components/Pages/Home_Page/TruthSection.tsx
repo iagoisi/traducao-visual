@@ -50,10 +50,10 @@ function TruthItem({
 export default function TruthSection() {
   return (
     <section id="verdade" className="relative flex min-h-[100svh] overflow-x-clip overflow-y-visible px-5 pb-28 pt-16 text-black sm:px-6 sm:pt-20 lg:py-24">
-      <div className="site-container grid items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-12">
+      <div className="site-container-wide grid items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-12">
         <div className="relative min-h-[300px] overflow-hidden rounded-[2rem] bg-[#ead9aa] sm:min-h-[400px] lg:min-h-[480px] xl:min-h-[520px]">
           <Image
-            src="/images/onee-hero.png"
+            src="/images/ngm_verdade_section.png"
             alt="Mulher provando roupa diante do espelho"
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"

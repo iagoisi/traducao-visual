@@ -1,10 +1,5 @@
-import RevealHero from "@/src/components/Hero/RevealHero";
+import SequenceHeroTest from "@/src/components/Hero/SequenceHeroTest";
 
-type Props = {
-  beforeSrc?: string;
-  afterSrc?: string;
-};
-
-export default function HeroSection(props: Props) {
-  return <RevealHero {...props} />;
+export default function HeroSection() {
+  return <SequenceHeroTest />;
 }
