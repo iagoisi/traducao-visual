@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { MetaPixelBootstrap } from "@/src/components/common/MetaPixelBootstrap";
 import { Suspense } from "react";
 import "../src/styles/globals.css";
-import { Arbutus_Slab, Host_Grotesk } from "next/font/google";
+import { Boldonse, Host_Grotesk } from "next/font/google";
 
-const titleFont = Arbutus_Slab({ subsets: ["latin"], variable: "--font-title", weight: ["400"], display: "swap" });
-const bodyFont  = Host_Grotesk({ subsets: ["latin"], variable: "--font-text", weight: ["400","700"], display: "swap" });
+const titleFont = Boldonse({ subsets: ["latin"], variable: "--font-title", weight: ["400"], display: "swap" });
+const bodyFont  = Host_Grotesk({ subsets: ["latin"], variable: "--font-text", weight: ["400","500","700"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Tradução Visual | Wity Prado",

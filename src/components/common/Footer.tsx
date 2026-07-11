@@ -82,11 +82,29 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-black/8 pt-6 text-base text-black/42 sm:flex-row sm:items-center sm:justify-between sm:text-sm">
+        <div className="grid gap-5 border-t border-black/8 pt-6 text-base text-black/42 sm:text-sm lg:grid-cols-[1fr_auto_1fr] lg:items-center">
           <p>© 2026 Tradução Visual. Todos os direitos reservados.</p>
-          <div className="flex gap-5">
-            <a href="#" className="transition-colors duration-300 hover:text-red-500">Privacidade</a>
-            <a href="#" className="transition-colors duration-300 hover:text-red-500">Termos de uso</a>
+          <div className="contents">
+            <a
+              href="https://iagoisi.isitech.online"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Feito por ISI Tech"
+              className="flex w-fit items-center gap-3 rounded-full border border-black/10 bg-white/65 px-3 py-2 text-black/45 transition-[border-color,color,transform] duration-300 hover:-translate-y-0.5 hover:border-red-500/35 hover:text-red-500 lg:col-start-3 lg:row-start-1 lg:justify-self-end"
+            >
+              <span className="text-xs font-medium uppercase leading-none tracking-[0.16em]">Feito por</span>
+              <Image
+                src="/images/isi_tech.PNG"
+                alt="ISI Tech"
+                width={96}
+                height={96}
+                className="h-8 w-8 rounded-md bg-white object-contain"
+              />
+            </a>
+            <div className="flex gap-5 lg:col-start-2 lg:row-start-1 lg:justify-self-center">
+              <a href="#" className="transition-colors duration-300 hover:text-red-500">Privacidade</a>
+              <a href="#" className="transition-colors duration-300 hover:text-red-500">Termos de uso</a>
+            </div>
           </div>
         </div>
       </div>

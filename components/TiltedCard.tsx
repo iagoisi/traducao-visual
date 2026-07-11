@@ -1,5 +1,5 @@
 import type { SpringOptions } from 'motion/react';
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 
 interface TiltedCardProps {
@@ -19,6 +19,7 @@ interface TiltedCardProps {
   cardClassName?: string;
   imageClassName?: string;
   imageObjectFit?: React.CSSProperties['objectFit'];
+  autoTiltOnMobile?: boolean;
   children?: React.ReactNode;
 }
 
@@ -45,9 +46,12 @@ export default function TiltedCard({
   cardClassName = '',
   imageClassName = '',
   imageObjectFit = 'cover',
+  autoTiltOnMobile = false,
   children
 }: TiltedCardProps) {
   const ref = useRef<HTMLElement>(null);
+  const pointerInteractionUntilRef = useRef(0);
+  const lastYRef = useRef(0);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useSpring(useMotionValue(0), springValues);
@@ -60,14 +64,14 @@ export default function TiltedCard({
     mass: 1
   });
 
-  const [lastY, setLastY] = useState(0);
+  const applyTilt = useCallback((clientX: number, clientY: number) => {
+    const element = ref.current;
 
-  function handleMouse(e: React.MouseEvent<HTMLElement>) {
-    if (!ref.current) return;
+    if (!element) return;
 
-    const rect = ref.current.getBoundingClientRect();
-    const offsetX = e.clientX - rect.left - rect.width / 2;
-    const offsetY = e.clientY - rect.top - rect.height / 2;
+    const rect = element.getBoundingClientRect();
+    const offsetX = clientX - rect.left - rect.width / 2;
+    const offsetY = clientY - rect.top - rect.height / 2;
 
     const rotationX = (offsetY / (rect.height / 2)) * -rotateAmplitude;
     const rotationY = (offsetX / (rect.width / 2)) * rotateAmplitude;
@@ -75,26 +79,86 @@ export default function TiltedCard({
     rotateX.set(rotationX);
     rotateY.set(rotationY);
 
-    x.set(e.clientX - rect.left);
-    y.set(e.clientY - rect.top);
+    x.set(clientX - rect.left);
+    y.set(clientY - rect.top);
 
-    const velocityY = offsetY - lastY;
+    const velocityY = offsetY - lastYRef.current;
     rotateFigcaption.set(-velocityY * 0.6);
-    setLastY(offsetY);
+    lastYRef.current = offsetY;
+  }, [rotateAmplitude, rotateFigcaption, rotateX, rotateY, x, y]);
+
+  function handlePointerMove(e: React.PointerEvent<HTMLElement>) {
+    pointerInteractionUntilRef.current = performance.now() + 1200;
+    applyTilt(e.clientX, e.clientY);
   }
 
-  function handleMouseEnter() {
+  function handlePointerEnter() {
     scale.set(scaleOnHover);
     opacity.set(1);
   }
 
-  function handleMouseLeave() {
+  function handlePointerLeave() {
+    pointerInteractionUntilRef.current = performance.now() + 1200;
     opacity.set(0);
     scale.set(1);
     rotateX.set(0);
     rotateY.set(0);
     rotateFigcaption.set(0);
+    lastYRef.current = 0;
   }
+
+  useEffect(() => {
+    if (!autoTiltOnMobile) return;
+
+    const coarsePointer = window.matchMedia('(hover: none), (pointer: coarse)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (!coarsePointer.matches || reducedMotion.matches) return;
+
+    let animationFrame = 0;
+    const startedAt = performance.now();
+
+    const animate = (now: number) => {
+      const element = ref.current;
+
+      if (element && now > pointerInteractionUntilRef.current) {
+        const rect = element.getBoundingClientRect();
+        const elapsed = (now - startedAt) / 1000;
+        const driftX = Math.sin(elapsed * 0.72) * rect.width * 0.26;
+        const driftY = Math.cos(elapsed * 0.58) * rect.height * 0.2;
+
+        scale.set(scaleOnHover);
+        opacity.set(0);
+        applyTilt(
+          rect.left + rect.width / 2 + driftX,
+          rect.top + rect.height / 2 + driftY
+        );
+      }
+
+      animationFrame = window.requestAnimationFrame(animate);
+    };
+
+    animationFrame = window.requestAnimationFrame(animate);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      scale.set(1);
+      rotateX.set(0);
+      rotateY.set(0);
+      rotateFigcaption.set(0);
+      lastYRef.current = 0;
+    };
+  }, [
+    autoTiltOnMobile,
+    opacity,
+    applyTilt,
+    rotateAmplitude,
+    rotateFigcaption,
+    rotateX,
+    rotateY,
+    scale,
+    scaleOnHover,
+  ]);
 
   return (
     <figure
@@ -104,9 +168,11 @@ export default function TiltedCard({
         height: containerHeight,
         width: containerWidth
       }}
-      onMouseMove={handleMouse}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onPointerMove={handlePointerMove}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
+      onPointerCancel={handlePointerLeave}
+      onPointerUp={handlePointerLeave}
     >
       {showMobileWarning && (
         <div className="absolute top-4 text-center text-sm block sm:hidden">

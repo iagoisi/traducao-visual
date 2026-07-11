@@ -28,14 +28,14 @@ export default function AboutWitySection() {
       id="sobre"
       className="relative overflow-x-clip px-5 py-20 text-black sm:px-6 lg:py-28"
     >
-      <div className="site-container">
+      <div className="site-container-wide">
         <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16 xl:gap-24">
           <div className="relative mx-auto w-full max-w-2xl pb-8 sm:pb-10">
             <div className="absolute inset-x-5 bottom-0 top-8 rounded-[2rem] border border-white/55 bg-white/38 shadow-[0_30px_100px_rgba(107,67,39,0.16)] backdrop-blur" />
 
             <div className="relative aspect-square overflow-hidden rounded-[1.75rem] border border-white/65 bg-[#eee9e7]">
               <Image
-                src="/images/wity.png"
+                src="/images/sobre_wity.png"
                 alt="Wity Prado ao lado de um manequim"
                 fill
                 priority={false}

@@ -45,7 +45,7 @@ export default function ChangeSection() {
 
   return (
     <section id="mudanca" className="relative flex min-h-[100svh] flex-col overflow-x-clip overflow-y-visible px-5 pb-24 pt-14 text-white sm:px-6 sm:pb-24 sm:pt-16 lg:py-16">
-      <div className="site-container flex flex-1 flex-col justify-center gap-7 sm:gap-9 lg:gap-10">
+      <div className="site-container-wide flex flex-1 flex-col justify-center gap-7 sm:gap-9 lg:gap-10">
         <div className="grid items-start gap-6 lg:grid-cols-[1.3fr_0.7fr] lg:items-center lg:gap-8">
           <h2 className="mt-2 max-w-xl text-3xl font-semibold leading-tight text-black/90 sm:text-4xl lg:text-3xl">
             Você mudou e a sua <br /> imagem não <span className="color-red">acompanhou.</span>

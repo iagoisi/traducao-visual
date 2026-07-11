@@ -42,7 +42,7 @@ export default function FaqSection() {
 
   return (
     <section id="duvidas" className="relative overflow-x-clip px-5 py-20 text-black sm:px-6 lg:py-28">
-      <div className="site-container grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+      <div className="site-container-wide grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
         <div>
           <span className="grid h-12 w-12 place-items-center rounded-full bg-red-500 text-white shadow-[0_16px_45px_rgba(255,82,82,0.3)]">
             <MessageCircleQuestion className="h-6 w-6" aria-hidden="true" />

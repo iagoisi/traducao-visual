@@ -133,7 +133,7 @@ function TimelineCard({
 
   return (
     <article
-      className={`relative grid h-full min-h-[25rem] w-full grid-rows-[auto_auto_1fr] rounded-2xl border p-4 transition-[border-color,background-color,box-shadow] duration-500 md:min-h-[26rem] xl:min-h-0 lg:p-[clamp(0.75rem,1.8vh,1.25rem)] ${
+      className={`relative grid h-full min-h-[25rem] w-full grid-rows-[auto_auto_1fr] rounded-2xl border p-4 transition-[border-color,background-color,box-shadow] duration-500 md:min-h-[26rem] xl:min-h-0 lg:p-[clamp(0.75rem,1.8vh,1.25rem)] xl:p-[clamp(0.78rem,1.35vh,1rem)] ${
         active
           ? "timeline-card--activated border-red-500/35 bg-[#fffaf3] shadow-[0_22px_70px_rgba(255,82,82,0.18)]"
           : `${
@@ -152,7 +152,7 @@ function TimelineCard({
         {step.marker}
       </div>
 
-      <div className="relative mb-3 h-40 overflow-hidden rounded-xl border border-white/55 bg-[linear-gradient(145deg,rgba(255,255,255,0.88),rgba(255,226,217,0.66))] sm:h-44 lg:mb-[clamp(0.5rem,1.4vh,1rem)] xl:h-[clamp(7.5rem,16vh,10rem)]">
+      <div className="relative mb-3 h-40 overflow-hidden rounded-xl border border-white/55 bg-[linear-gradient(145deg,rgba(255,255,255,0.88),rgba(255,226,217,0.66))] sm:h-44 lg:mb-[clamp(0.5rem,1.4vh,1rem)] xl:mb-[clamp(0.45rem,1vh,0.75rem)] xl:h-[clamp(6.8rem,13vh,8.5rem)]">
         <div className="absolute left-4 top-4 rounded-full border border-red-500/18 bg-white/68 px-3 py-1 text-[0.62rem] font-medium uppercase tracking-[0.14em] text-red-500/75 backdrop-blur">
           {step.eyebrow}
         </div>
@@ -167,8 +167,8 @@ function TimelineCard({
           </div>
         </div>
       </div>
-      <h3 className="min-h-[2.5rem] text-base font-semibold leading-tight text-black/88 lg:text-[clamp(0.78rem,1.35vh,0.95rem)]">{step.title}</h3>
-      <p className="mt-2 whitespace-pre-line text-base leading-7 text-black/58 lg:mt-[clamp(0.35rem,1vh,0.75rem)] lg:text-[clamp(0.72rem,1.35vh,0.875rem)] lg:leading-[1.45]">{step.description}</p>
+      <h3 className="min-h-[2.5rem] text-base font-semibold leading-tight text-black/88 lg:text-[clamp(0.78rem,1.35vh,0.95rem)] xl:min-h-[2rem] xl:text-[clamp(0.82rem,1.25vh,0.95rem)]">{step.title}</h3>
+      <p className="mt-2 whitespace-pre-line text-base leading-7 text-black/58 lg:mt-[clamp(0.35rem,1vh,0.75rem)] lg:text-[clamp(0.72rem,1.35vh,0.875rem)] lg:leading-[1.45] xl:mt-[clamp(0.32rem,0.8vh,0.55rem)] xl:text-[clamp(0.74rem,1.18vh,0.86rem)] xl:leading-[1.42]">{step.description}</p>
       <span className="sr-only">Etapa {index + 1}</span>
     </article>
   );
@@ -264,7 +264,7 @@ export default function TranslationSection() {
       className="translation-section relative overflow-x-clip overflow-y-visible text-black"
     >
       <div className="translation-stage grid gap-20 px-5 py-20 sm:px-6 md:gap-24">
-        <div className="translation-top site-container relative z-20 grid min-h-0 grid-cols-1 place-content-center items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] xl:overflow-visible xl:gap-[clamp(1rem,2.5vh,2rem)]">
+        <div className="translation-top site-container-wide relative z-20 grid min-h-0 grid-cols-1 place-content-center items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] xl:overflow-visible xl:gap-[clamp(2rem,4vw,4.5rem)]">
           <div className="mx-auto w-full max-w-2xl">
             <p className="text-[clamp(0.68rem,1.25vh,0.85rem)] uppercase tracking-[0.24em] text-red-500/70">
               MÉTODO AUTORAL
@@ -277,7 +277,7 @@ export default function TranslationSection() {
               e transforma isso em <span className="color-red">escolhas visuais práticas</span> para o seu dia a dia.
             </p>
 
-            <div className="mt-5 h-[22rem] w-full sm:h-[14rem] lg:mt-[clamp(0.9rem,2.2vh,1.4rem)] xl:h-[clamp(11rem,22vh,13rem)]">
+            <div className="mt-5 h-[22rem] w-full sm:h-[14rem] lg:mt-[clamp(0.9rem,2.2vh,1.4rem)] xl:h-[clamp(9.5rem,18vh,11rem)]">
               <TiltedCard
                 containerHeight="100%"
                 containerWidth="100%"
@@ -285,6 +285,7 @@ export default function TranslationSection() {
                 imageWidth="100%"
                 rotateAmplitude={8}
                 scaleOnHover={1.015}
+                autoTiltOnMobile
                 showMobileWarning={false}
                 showTooltip={false}
                 cardClassName="rounded-2xl border border-white/50 bg-white/54 p-[clamp(0.75rem,1.8vh,1.15rem)] shadow-[0_24px_70px_rgba(107,67,39,0.16)] backdrop-blur"
@@ -299,9 +300,9 @@ export default function TranslationSection() {
           </div>
 
           <div className="relative mx-auto grid w-full max-w-2xl items-center lg:flex lg:min-h-0 xl:h-full">
-            <div className="relative mx-auto h-[22rem] w-[min(92%,32rem)] sm:h-[28rem] lg:ml-auto lg:h-[24rem] lg:w-[78%] xl:h-[min(37vh,100%)] xl:max-h-[360px]">
+            <div className="relative mx-auto h-[22rem] w-[min(92%,32rem)] sm:h-[28rem] lg:ml-auto lg:h-[24rem] lg:w-[78%] xl:h-[min(32vh,100%)] xl:max-h-[320px]">
               <TiltedCard
-                imageSrc="/images/woman_TranslationSection_2.png"
+                imageSrc="/images/cell_alpha_neo.png"
                 altText="Referência visual para tradução de imagem"
                 containerHeight="100%"
                 containerWidth="100%"
@@ -310,6 +311,7 @@ export default function TranslationSection() {
                 imageObjectFit="contain"
                 rotateAmplitude={30}
                 scaleOnHover={1.03}
+                autoTiltOnMobile
                 showMobileWarning={false}
                 showTooltip={false}
                 cardClassName="rounded-[2rem] border border-white/50 bg-white/30 shadow-[0_30px_100px_rgba(107,67,39,0.18)]"
@@ -330,7 +332,7 @@ export default function TranslationSection() {
           ref={timelineRef}
           className="translation-bottom relative z-10 grid min-h-0 place-content-center xl:overflow-visible"
         >
-          <div className="site-container mx-auto">
+          <div className="site-container-wide mx-auto flex h-full min-h-0 flex-col justify-center px-5 sm:px-6 xl:px-8">
             <div className="relative flex flex-col items-center gap-3 text-center">
               <div>
                 <h2 className="text-[clamp(1.6rem,4vh,2.25rem)] font-semibold leading-tight text-black/90">
@@ -345,7 +347,7 @@ export default function TranslationSection() {
               </div>
             </div>
 
-            <div className="relative mt-[clamp(1rem,2.6vh,1.75rem)] xl:pt-10">
+            <div className="relative mt-[clamp(1rem,2.6vh,1.75rem)] xl:pt-8">
               <div className="absolute bottom-6 left-7 top-6 w-px bg-black/12 md:hidden" />
               <div
                 className="absolute left-7 top-6 w-px bg-gradient-to-b from-red-500 via-[#ff9f8b] to-[#ffe0ba] transition-[height] duration-300 md:hidden"
@@ -353,13 +355,13 @@ export default function TranslationSection() {
                   height: `max(0px, calc(${progress * 100}% - 1.5rem))`,
                 }}
               />
-              <div className="absolute left-0 right-0 top-[calc(50%+1.25rem)] hidden h-px bg-black/12 xl:block" />
+              <div className="absolute left-0 right-0 top-[calc(50%+1rem)] hidden h-px bg-black/12 xl:block" />
               <div
-                className="absolute left-0 top-[calc(50%+1.25rem)] hidden h-px bg-gradient-to-r from-red-500 via-[#ff9f8b] to-[#ffe0ba] transition-[width] duration-300 xl:block"
+                className="absolute left-0 top-[calc(50%+1rem)] hidden h-px bg-gradient-to-r from-red-500 via-[#ff9f8b] to-[#ffe0ba] transition-[width] duration-300 xl:block"
                 style={{ width: `${progress * 100}%` }}
               />
 
-              <div className="relative z-10 grid gap-8 pl-16 pt-4 md:grid-cols-2 md:gap-8 md:pl-0 xl:grid-cols-4 xl:gap-20 xl:pt-0">
+              <div className="relative z-10 grid gap-8 pl-16 pt-4 md:grid-cols-2 md:gap-8 md:pl-0 xl:grid-cols-4 xl:gap-[clamp(1.25rem,2vw,2rem)] xl:pt-0">
                 {processSteps.map((step, index) => (
                   <div
                     key={step.title}
