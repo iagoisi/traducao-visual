@@ -6,7 +6,12 @@ import { trackInitiateContact } from "@/src/services/Meta/metaPixel";
 import HeaderNeo from "@/src/components/common/HeaderNeo";
 
 const sequenceSrc = "/images/ezgif.com-video-to-webp-converter3.webp";
-const sequenceVideoSrc = "/images/hero_mp4.mp4";
+const mobileSequenceFrameCount = 192;
+const mobileSequenceFrameSrcs = Array.from(
+  { length: mobileSequenceFrameCount },
+  (_, index) =>
+    `/images/seq_hero/ezgif-frame-${String(index + 1).padStart(3, "0")}.jpg`
+);
 
 const anaWhatsappUrl =
   "https://wa.me/556792373674?text=Ol%C3%A1%2C%20Ana%21%20Quero%20come%C3%A7ar%20minha%20Tradu%C3%A7%C3%A3o%20Visual.%20Pode%20me%20enviar%20o%20link%20para%20pagamento%3F";
@@ -191,43 +196,39 @@ export default function SequenceHeroTest() {
       renderFrame();
     };
 
-    const setupVideoFallback = async () => {
-      const video = document.createElement("video");
-      video.muted = true;
-      video.playsInline = true;
-      video.preload = "auto";
-      video.src = sequenceVideoSrc;
-
-      await new Promise<void>((resolve, reject) => {
-        video.onloadeddata = () => resolve();
-        video.onerror = () => reject(new Error("Hero video could not be loaded"));
-        video.load();
+    const loadImageFrame = (src: string) =>
+      new Promise<HTMLImageElement>((resolve, reject) => {
+        const image = new window.Image();
+        image.decoding = "async";
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = src;
       });
+
+    const loadMobileSequenceFrames = async () => {
+      const firstFrame = await loadImageFrame(mobileSequenceFrameSrcs[0]);
 
       if (disposed) return;
 
-      framesRef.current = [video];
-      video.currentTime = 0;
+      framesRef.current = [firstFrame];
+      frameRef.current.index = 0;
       renderFrame();
 
-      const updateVideoProgress = (progress: number) => {
-        const duration = video.duration || 0;
-        if (!duration) return;
+      const loadedFrames = await Promise.all(
+        mobileSequenceFrameSrcs.map((src, index) =>
+          index === 0 ? Promise.resolve(firstFrame) : loadImageFrame(src)
+        )
+      );
 
-        const nextTime = Math.min(
-          Math.max(progress * duration, 0),
-          Math.max(duration - 0.001, 0)
-        );
+      if (disposed) return;
 
-        if (Math.abs(video.currentTime - nextTime) > 0.015) {
-          video.currentTime = nextTime;
-        }
-      };
-
-      video.addEventListener("seeked", renderFrame);
-      video.addEventListener("timeupdate", renderFrame);
-
-      void setupScrollSequence(120, updateVideoProgress);
+      framesRef.current = loadedFrames;
+      frameRef.current.index = Math.min(
+        frameRef.current.index,
+        loadedFrames.length - 1
+      );
+      renderFrame();
+      void setupScrollSequence(loadedFrames.length);
     };
 
     const decodeWebpFrames = async () => {
@@ -238,7 +239,7 @@ export default function SequenceHeroTest() {
       ).ImageDecoder;
 
       if (!ImageDecoderConstructor) {
-        await setupVideoFallback();
+        await loadMobileSequenceFrames();
         return;
       }
 
@@ -252,7 +253,7 @@ export default function SequenceHeroTest() {
           data: buffer,
         });
       } catch {
-        await setupVideoFallback();
+        await loadMobileSequenceFrames();
         return;
       }
 
@@ -260,7 +261,7 @@ export default function SequenceHeroTest() {
         await decoder.tracks.ready;
       } catch {
         decoder.close();
-        await setupVideoFallback();
+        await loadMobileSequenceFrames();
         return;
       }
 
@@ -279,7 +280,7 @@ export default function SequenceHeroTest() {
           decodedFrame = await decoder.decode({ frameIndex: index });
         } catch {
           decoder.close();
-          await setupVideoFallback();
+          await loadMobileSequenceFrames();
           return;
         }
 
@@ -313,7 +314,11 @@ export default function SequenceHeroTest() {
       decoder.close();
     };
 
-    void decodeWebpFrames();
+    if (window.matchMedia("(max-width: 639px)").matches) {
+      void loadMobileSequenceFrames();
+    } else {
+      void decodeWebpFrames();
+    }
     window.addEventListener("resize", renderFrame);
 
     return () => {
