@@ -34,7 +34,7 @@ export default function ProductSection() {
                 Você mudou. Sua imagem pode acompanhar.
               </p>
               <h2 className="mt-5 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-                Pronta para começar?
+                Comece Agora!
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/68">
                 Por menos do que uma blusa que você acha linda, compra e não usa,
